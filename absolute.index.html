@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#d4af37" />
+  <title>C11 IA ABSOLUTA — Sua Inteligência Ilimitada</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkMxMSBJQSBBYnNvbHV0YSIsCiAgInNob3J0X25hbWUiOiAiQzExIiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMzA0MDUiLAogICJ0aGVtZV9jb2xvciI6ICIjZDRhZjM3IiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LCUiLAogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIKICAgIH0KICBdCn0=">
+  <link rel="icon" type="image/svg+xml" href="#c11-logo">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #d4af37;
+      --bg-dark: #030405;
+      --bg-panel: rgba(10, 15, 20, 0.7);
+      --text: #fff;
+      --border: rgba(255, 255, 255, 0.05);
+      --input-bg: rgba(255, 255, 255, 0.08);
+      --btn: var(--gold);
+      --font: 'Inter', sans-serif;
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --transition: all 0.3s ease;
+    }
+
+    .theme-light {
+      --bg-dark: #f8f9fa;
+      --bg-panel: #fff;
+      --text: #1a1a1a;
+      --border: #ddd;
+      --input-bg: #f1f3f5;
+      --btn: #b8860b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      font-family: var(--font);
+      transition: var(--transition);
+      min-height: 100vh;
+      overflow: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 30px;
+      background: rgba(3, 4, 5, 0.9);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #0a0a12, #1a1a2e);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .title h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .theme-toggle {
+      margin-left: auto;
+      background: var(--btn);
+      color: #000;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .layout {
+      display: flex;
+      height: calc(100vh - 72px);
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: var(--bg-panel);
+      border-right: 1px solid var(--border);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+    }
+
+    .side-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .side-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateX(4px);
+    }
+
+    .side-btn.active {
+      background: rgba(212, 175, 55, 0.15);
+      border-left: 3px solid var(--gold);
+      padding-left: 13px;
+    }
+
+    .main {
+      flex: 1;
+      padding: 20px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tab-content {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tab-content.active {
+      display: flex;
+      flex: 1;
+    }
+
+    .upgrade-banner {
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 20px 0;
+    }
+
+    .upgrade-banner div {
+      font-size: 13px;
+      opacity: 0.9;
+      margin: 4px 0;
+    }
+
+    .upgrade-banner strong {
+      color: var(--gold);
+    }
+
+    .pix-btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .pix-details {
+      margin-top: 10px;
+      padding: 12px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .chat-area, .trader-mode {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .message.assistant {
+      background: rgba(212, 175, 55, 0.12);
+      align-self: flex-start;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .input-row input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .send-btn {
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 2px solid var(--btn);
+      background: transparent;
+      color: var(--btn);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    #chartContainer {
+      width: 100%;
+      height: 280px;
+      border-radius: 16px;
+      background: #000;
+      margin: 10px 0;
+    }
+
+    @media (max-width: 768px) {
+      .layout { flex-direction: column; }
+      .sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Logotipo SVG (embutido) -->
+  <svg style="display: none">
+    <symbol id="c11-logo" viewBox="0 0 500 500">
+      <rect width="100%" height="100%" fill="#030405"/>
+      <circle cx="250" cy="250" r="180" fill="none" stroke="#d4af37" stroke-width="4" stroke-opacity="0.2"/>
+      <circle cx="250" cy="250" r="120" fill="none" stroke="#d4af37" stroke-width="3" stroke-dasharray="6,6"/>
+      <path d="M250 120 L330 200 L300 230 L250 180 L200 230 L170 200 Z" fill="#d4af37" opacity="0.9"/>
+      <text x="250" y="340" font-size="48" font-family="Arial" fill="#fff" text-anchor="middle">C11</text>
+      <text x="250" y="380" font-size="18" font-family="Arial" fill="#d4af37" text-anchor="middle">IA ABSOLUTA</text>
+      <circle cx="250" cy="250" r="10" fill="#d4af37" opacity="0.8"/>
+    </symbol>
+  </svg>
+
+  <div class="app">
+    <header>
+      <div class="logo">
+        <svg><use href="#c11-logo"/></svg>
+      </div>
+      <div class="title">
+        <h1>C11 IA</h1>
+      </div>
+      <button class="theme-toggle" id="themeToggle">🌙 Escuro</button>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <button class="side-btn active" data-view="chat">💬 Chat IA</button>
+        <button class="side-btn" data-view="trader">📈 Trader Pro</button>
+        <button class="side-btn" data-view="voice">🎙️ Voz</button>
+        <div class="side-bottom">
+          <button class="side-btn" data-view="settings">⚙️ Config</button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <!-- CHAT -->
+        <div id="chat" class="tab-content active">
+          <div class="upgrade-banner">
+            <div style="font-size:15px; font-weight:600;">🚀 Versão Pro Disponível</div>
+            <div>Receba análises avançadas, IA autônoma e memória ilimitada.</div>
+            <button class="pix-btn">💰 Pagar com PIX (R$ 29,90/mês)</button>
+            <div class="pix-details" style="display:none;">
+              <strong>Chave PIX:</strong> <span style="font-family:monospace">33999730052</span><br>
+              <strong>Para:</strong> Inter (C11 IA Pro)<br>
+              📲 Copie e pague pelo seu app bancário.
+            </div>
+          </div>
+          <div class="chat-area">
+            <div class="messages" id="messages">
+              <div class="message assistant">Olá! Sou a C11 IA Absoluta. Como posso ajudar?</div>
+            </div>
+            <div class="input-row">
+              <input id="inputBox" placeholder="Digite sua pergunta..." />
+              <button class="send-btn" id="sendBtn">ENVIAR</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRADER -->
+        <div id="trader" class="tab-content">
+          <div class="upgrade-banner">
+            <div style="font-size:15px; font-weight:600;">📊 Trader Pro Ativo</div>
+            <div>Analise BTC, ETH, ações e mais com IA especializada.</div>
+            <button class="pix-btn">💰 Ativar Pro com PIX</button>
+            <div class="pix-details" style="display:none;">
+              <strong>Chave PIX:</strong> 33999730052<br>
+              <strong>Valor:</strong> R$ 29,90/mês
+            </div>
+          </div>
+          <div id="chartContainer"></div>
+          <div class="messages" id="traderMessages"></div>
+          <div class="input-row">
+            <input id="traderInput" placeholder="Ex: Analise BTC 4h" />
+            <button class="send-btn" id="sendTrader">ANALISAR</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // =============== TEMA CLARO/ESCURO ===============
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    const savedTheme = localStorage.getItem('c11_theme') || 'dark';
+    if (savedTheme === 'light') body.classList.add('theme-light');
+
+    themeToggle.textContent = savedTheme === 'light' ? '☀️ Claro' : '🌙 Escuro';
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('theme-light');
+      const isLight = body.classList.contains('theme-light');
+      themeToggle.textContent = isLight ? '☀️ Claro' : '🌙 Escuro';
+      localStorage.setItem('c11_theme', isLight ? 'light' : 'dark');
+    });
+
+    // =============== ABAS ===============
+    document.querySelectorAll('.side-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const view = btn.dataset.view;
+        document.querySelectorAll('.tab-content').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        document.getElementById(view).classList.add('active');
+      });
+    });
+
+    // =============== CHAT ===============
+    const messages = document.getElementById('messages');
+    const inputBox = document.getElementById('inputBox');
+    const sendBtn = document.getElementById('sendBtn');
+
+    const chatHistory = JSON.parse(localStorage.getItem('c11_chat')) || [
+      { role: 'assistant', text: 'Olá! Sou a C11 IA Absoluta. Como posso ajudar?' }
+    ];
+
+    function addMessage(text, role) {
+      const msg = document.createElement('div');
+      msg.className = 'message' + (role === 'assistant' ? ' assistant' : '');
+      msg.textContent = text;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+      if (role === 'user') chatHistory.push({ role: 'user', text });
+      else chatHistory.push({ role: 'assistant', text });
+      localStorage.setItem('c11_chat', JSON.stringify(chatHistory));
+    }
+
+    renderChat();
+
+    function renderChat() {
+      messages.innerHTML = '';
+      chatHistory.forEach(m => addMessage(m.text, m.role));
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const text = inputBox.value.trim();
+      if (text) {
+        addMessage(text, 'user');
+        inputBox.value = '';
+        setTimeout(() => {
+          const replies = [
+            'Interessante. Vou analisar isso profundamente.',
+            'Entendido. Aqui está minha resposta com base em dados globais.',
+            'Essa é uma ótima pergunta. Minha análise indica um padrão claro.',
+            'Processado. Recomendo ação imediata com risco controlado.'
+          ];
+          addMessage(replies[Math.floor(Math.random() * replies.length)], 'assistant');
+        }, 600);
+      }
+    });
+
+    inputBox.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        sendBtn.click();
+      }
+    });
+
+    // =============== PIX ===============
+    document.querySelectorAll('.pix-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const details = this.nextElementSibling;
+        details.style.display = details.style.display === 'block' ? 'none' : 'block';
+        this.textContent = details.style.display === 'block' 
+          ? '✅ PIX Copiado!' 
+          : '💰 Pagar com PIX (R$ 29,90/mês)';
+        if (details.style.display === 'block') {
+          navigator.clipboard.writeText('33999730052');
+        }
+      });
+    });
+
+    // =============== VOICE (Web Speech API) ===============
+    const voiceBtn = document.createElement('button');
+    voiceBtn.textContent = '🎙️ Falar com C11';
+    voiceBtn.style = 'margin:10px;padding:10px;background:var(--gold);color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:bold';
+    document.querySelector('.chat-area').appendChild(voiceBtn);
+
+    voiceBtn.addEventListener('click', () => {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'pt-BR';
+      recognition.start();
+
+      recognition.onresult = (e) => {
+        const transcript = e.results[0][0].transcript;
+        inputBox.value = transcript;
+        sendBtn.click();
+      };
+    });
+
+    // =============== TRADER CHART (Simulado) ===============
+    if (typeof LightweightCharts !== 'undefined') {
+      const chart = LightweightCharts.createChart('chartContainer', {
+        layout: { background: '#000', textColor: '#ddd' },
+        grid: { vertLines: { color: 'rgba(255,255,255,0.1)' }, horzLines: { color: 'rgba(255,255,255,0.1)' } }
+      });
+      const series = chart.addCandlestickSeries({
+        upColor: '#4fff8f', downColor: '#ff4f8f', borderUpColor: '#4fff8f', borderDownColor: '#ff4f8f'
+      });
+      const now = Date.now();
+      const data = Array.from({ length: 50 }, (_, i) => ({
+        time: (now - (50 - i) * 3600000) / 1000,
+        open: 60000 + Math.random() * 10000,
+        high: 60000 + Math.random() * 12000,
+        low: 60000 + Math.random() * 8000,
+        close: 60000 + Math.random() * 10000
+      }));
+      series.setData(data);
+    }
+  </script>
+</body>
+</html>
